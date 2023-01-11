@@ -1,0 +1,41 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2006                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      Uf;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+        
+		interpolationScheme cell;
+        type            surfaces;
+        libs            (sampling);
+        outputControl   outputTime;
+        surfaceFormat  raw;
+        fields
+        (
+            FOconcentrationMean:columnAverage(alpha.salt)
+        );
+        surfaces
+        (
+            interpolatedIso
+            {
+                // Iso surface for interpolated values only
+                type            isoSurface;    // always triangulated
+                isoField        alpha.salt;
+                isoValue        0.5;
+                interpolate     true;
+                regularise      true;
+            }
+
+        );
+
+// ************************************************************************* //

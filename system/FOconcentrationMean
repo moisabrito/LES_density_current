@@ -1,0 +1,38 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2006                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      C;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+        type            columnAverage;
+        libs            (fieldFunctionObjects);
+        // Note: include processorCyclics!
+        patches         (frontandbackplanes);
+		
+	
+        fields
+        (
+            alpha.salt
+        );
+
+        region          region0;
+        enabled         true;
+        log             true;
+        timeStart       0; // approx 2x flow-throughs
+        //timeEnd          inf;
+        executeControl  writeTime;
+
+
+
+// ************************************************************************* //
